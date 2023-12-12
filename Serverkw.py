@@ -14,5 +14,17 @@ import json
 import PySimpleGUI as sg
 import threading
 
-
+def create_window():
+    sg.theme('DarkTeal5')
+    layout = [
+        [sg.Text('Connection Status: '), sg.Text('○', text_color='green', key='-LED-', font=('Helvetica', 16))],
+        [sg.Text('Core Voltage:', font=('Helvetica', 14)), sg.Text('', key='-CORE_VOLTAGE-', font=('Helvetica', 14))],
+        [sg.Text('Core Temperature:', font=('Helvetica', 14)), sg.Text('', key='-CORE_TEMP-', font=('Helvetica', 14))],
+        [sg.Text('ARM Memory:', font=('Helvetica', 14)), sg.Text('', key='-ARM_MEMORY-', font=('Helvetica', 14))],
+        [sg.Text('GPU Memory:', font=('Helvetica', 14)), sg.Text('', key='-GPU_MEMORY-', font=('Helvetica', 14))],
+        [sg.Text('CPU Frequency:', font=('Helvetica', 14)), sg.Text('', key='-CPU_FREQUENCY-', font=('Helvetica', 14))],
+        [sg.Text('Iteration:', font=('Helvetica', 14)), sg.Text('', key='-ITERATION-', font=('Helvetica', 14))],
+        [sg.Button('Exit', font=('Helvetica', 14))]
+    ]
+    return sg.Window('Server', layout, finaliz e=True, size=(500, 300))
 
