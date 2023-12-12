@@ -5,8 +5,8 @@ TPRG 2131 Fall 2023 Project 2
 December 14th, 2023
 Khari Wallace <khari.wallace@dcmail.ca>
 
-# This server runs on Pi and Pc, the server acts as a central node that receives,
-processes, and displays data from the connected client
+# This server runs on Pi, the server acts as a central node that receives, processes,
+and displays data from connected clients
 """
 
 import socket
@@ -26,7 +26,7 @@ def create_window():
         [sg.Text('Iteration:', font=('Helvetica', 14)), sg.Text('', key='-ITERATION-', font=('Helvetica', 14))],
         [sg.Button('Exit', font=('Helvetica', 14))]
     ]
-    return sg.Window('Server', layout, finaliz e=True, size=(500, 300))
+    return sg.Window('Server', layout, finalize=True, size=(500, 300))
 
 def handle_client(client_socket, window):
     led_on = True
@@ -88,5 +88,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-
 
