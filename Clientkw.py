@@ -30,3 +30,19 @@ def create_window():
     ]
     return sg.Window('Client', layout, finalize=True, size=(500, 300))
 
+def send_data(server_socket, window, stop_event):
+    for iteration in range(1, 51):
+        if stop_event.is_set():
+            break
+        cpu_frequency = get_cpu_clock_frequency()
+        data = {
+            "core_voltage": f"{1.2 + iteration * 0.01}V",
+            "core_temp": f"{55 + iteration * 0.1}°C",
+            "arm_memory": f"{512 + iteration}MB",
+            "gpu_memory": f"{256 + iteration}MB",
+            "cpu_frequency": cpu_frequency,
+            "iteration": iteration
+        }
+        server_socket.sendall(json.dumps(data).encode())
+        time.sleep(2)
+
