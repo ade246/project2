@@ -8,3 +8,11 @@ Khari Wallace <khari.wallace@dcmail.ca>
 # This server runs on Pi and Pc, the server acts as a central node that receives,
 processes, and displays data from the connected client
 """
+
+import socket
+import json
+import PySimpleGUI as sg
+import threading
+
+
+
