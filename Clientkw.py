@@ -21,3 +21,12 @@ def get_cpu_clock_frequency():
     frequency = os.popen('vcgencmd measure_clock arm').readline()
     return frequency.strip()
 
+def create_window():
+    sg.theme('DarkTeal5')
+    layout = [
+        [sg.Text('Connection Status: '), sg.Text('○', text_color='red', key='-LED-', font=('Helvetica', 16))],
+        [sg.Button('Start Sending Data', font=('Helvetica', 14)), sg.Button('Disconnect', font=('Helvetica', 14))],
+        [sg.Button('Exit', font=('Helvetica', 14))]
+    ]
+    return sg.Window('Client', layout, finalize=True, size=(500, 300))
+
