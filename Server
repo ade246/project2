@@ -1,1 +1,7 @@
 # project2
+The Server
+
+displays the received data in a real-time graphical user interface (GUI)
+handles connections from clients, processes incoming data, and updates its GUI accordingly
+LED indicator toggles between colours to visually represent the reception of new data.
+Provides an "Exit" button in the GUI for a clean and safe shutdown of the server.
