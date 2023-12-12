@@ -9,3 +9,15 @@ Khari Wallace <khari.wallace@dcmail.ca>
 of the data set. sent as Json object.
 """
 
+
+import socket
+import json
+import PySimpleGUI as sg
+import time
+import os
+import threading
+
+def get_cpu_clock_frequency():
+    frequency = os.popen('vcgencmd measure_clock arm').readline()
+    return frequency.strip()
+
