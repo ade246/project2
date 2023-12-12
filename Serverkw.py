@@ -28,3 +28,24 @@ def create_window():
     ]
     return sg.Window('Server', layout, finaliz e=True, size=(500, 300))
 
+def handle_client(client_socket, window):
+    led_on = True
+    try:
+        while True:
+            data = client_socket.recv(1024).decode()
+            if not data:
+                break
+
+            # Toggle the LED color
+            led_on = not led_on
+            window.write_event_value('-TOGGLE_LED-', led_on)
+
+            data = json.loads(data)
+            window.write_event_value('-UPDATE_GUI-', data)
+    except socket.error:
+        pass
+    finally:
+        client_socket.close()
+
+
+
