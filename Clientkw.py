@@ -46,3 +46,48 @@ def send_data(server_socket, window, stop_event):
         server_socket.sendall(json.dumps(data).encode())
         time.sleep(2)
 
+def main():
+    window = create_window()
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    connected = False
+    data_thread = None
+    stop_event = threading.Event()
+
+    try:
+        server_socket.connect(('127.0.0.1', 1500))  # Replace with server IP if different
+        window['-LED-'].update(text_color='green')
+        connected = True
+        print("Connected to the server.")
+
+        while True:
+            event, values = window.read()
+
+            if event in (sg.WIN_CLOSED, 'Exit'):
+                break
+
+            if event == 'Start Sending Data' and connected and not data_thread:
+                stop_event.clear()
+                data_thread = threading.Thread(target=send_data, args=(server_socket, window, stop_event), daemon=True)
+                data_thread.start()
+
+            if event == 'Disconnect' and connected:
+                stop_event.set()
+                if data_thread:
+                    data_thread.join()
+                server_socket.close()
+                window['-LED-'].update(text_color='red')
+                connected = False
+                data_thread = None
+                print("Disconnected from the server.")
+
+    except Exception as e:
+        sg.popup_error("Error:", e)
+    finally:
+        if connected:
+            server_socket.close()
+        window.close()
+
+if __name__ == '__main__':
+    main()
+
+
